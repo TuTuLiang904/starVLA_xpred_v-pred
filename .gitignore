@@ -1,0 +1,35 @@
+# Local repositories preserved before this project was consolidated.
+**/.git.upstream/
+
+# Datasets, model weights, checkpoints, and run artifacts.
+/starVLA/playground/
+**/datasets/
+**/data/
+**/cache/
+**/checkpoints/
+**/ckpts/
+**/evaluate_results/
+**/results/
+**/runs/
+**/outputs/
+**/logs/
+**/my-codex/
+**/wandb/
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.safetensors
+**/*.bin
+**/*.mp4
+**/*.npy
+**/*.parquet
+
+# Machine-local configuration and generated files.
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+nohup.out
+MUJOCO_LOG.TXT

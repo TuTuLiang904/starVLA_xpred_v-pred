@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This script is four levels below the StarVLA repository root:
+# examples/simBenchmarks/LIBERO-plus/eval_files.
+STARVLA_DIR="${STARVLA_DIR:-$(cd "$(dirname "$0")/../../../.." && pwd)}"
+# STARVLA_PYTHON is the preferred name.  Keep ABot_python as a backwards-
+# compatible fallback because older LIBERO-plus instructions used that name.
+STARVLA_PYTHON="${STARVLA_PYTHON:-${ABot_python:-python}}"
+your_ckpt="${your_ckpt:-/path/to/checkpoint.pt}"
+base_port="${base_port:-9883}"
+gpu_id="${gpu_id:-0}"
+USE_BF16="${USE_BF16:-1}"
+
+cd "${STARVLA_DIR}"
+export PYTHONPATH="${STARVLA_DIR}:${PYTHONPATH:-}"
+
+CMD=(
+  "${STARVLA_PYTHON}" deployment/model_server/server_policy.py
+  --ckpt_path "${your_ckpt}"
+  --port "${base_port}"
+)
+
+if [[ "${USE_BF16}" == "1" ]]; then
+  CMD+=(--use_bf16)
+fi
+
+CUDA_VISIBLE_DEVICES="${gpu_id}" "${CMD[@]}"
