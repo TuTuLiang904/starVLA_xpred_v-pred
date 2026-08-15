@@ -1,0 +1,5 @@
+assets: /mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/LIBERO-plus/libero/libero/./assets
+bddl_files: /mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/LIBERO-plus/libero/libero/./bddl_files
+benchmark_root: /mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/LIBERO-plus/libero/libero
+datasets: /mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/LIBERO-plus/libero/libero/../datasets
+init_states: /mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/LIBERO-plus/libero/libero/./init_files

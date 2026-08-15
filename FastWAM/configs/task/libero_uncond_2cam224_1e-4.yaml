@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+  - override /data: libero_2cam
+  - override /model: fastwam
+  - _self_
+
+# dataloading
+batch_size: 16
+num_workers: 8
+
+model:
+  mot_checkpoint_mixed_attn: false
+  # Edit these values here to select the action-head parameterization.
+  # Choices: v_prediction, x_prediction, x_prediction_v_loss.
+  action_prediction_type: v_prediction
+  action_x_pred_v_loss_eps: 0.05
+
+# scheduler
+lr_scheduler_type: "cosine"
+learning_rate: 1e-4
+num_epochs: 10
+max_steps: null
+log_every: 100
+save_every: 5000
+# Runs real policy sampling for action error, smoothness, and latency monitoring.
+# Set back to 999999 to disable periodic evaluation for a pure throughput run.
+eval_every: 2000
+
+# training
+gradient_accumulation_steps: 1
+weight_decay: 1e-2
+resume: null

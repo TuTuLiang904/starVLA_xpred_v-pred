@@ -1,0 +1,7 @@
+# @package _global_
+
+# Original FastWAM RoboTwin hyperparameters on a reproducible 50% episode subset.
+defaults:
+  - robotwin_uncond_3cam_384_1e-4
+  - override /data: robotwin_half
+  - _self_

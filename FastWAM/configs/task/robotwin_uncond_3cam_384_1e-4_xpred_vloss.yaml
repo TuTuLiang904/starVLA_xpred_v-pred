@@ -1,0 +1,9 @@
+# @package _global_
+
+# Clean-action prediction, optimized in flow-velocity space.
+defaults:
+  - robotwin_uncond_3cam_384_1e-4
+  - _self_
+
+model:
+  action_prediction_type: x_prediction_v_loss

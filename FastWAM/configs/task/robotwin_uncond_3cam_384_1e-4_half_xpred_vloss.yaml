@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - robotwin_uncond_3cam_384_1e-4_half
+  - _self_
+
+model:
+  action_prediction_type: x_prediction_v_loss
