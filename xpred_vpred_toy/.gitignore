@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+results/
+results_*/
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+figures/out/
+.DS_Store
+logs/
+*.pt
+*.ckpt

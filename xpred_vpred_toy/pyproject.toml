@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xpred-vpred-toy"
+version = "1.0.0"
+description = "Paired toy study of clean-action vs velocity prediction for dual-stream arm–base flow experts"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "MM-ABC / VELA toy study"}]
+dependencies = [
+  "torch>=2.1",
+  "numpy>=1.24",
+  "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["scipy>=1.11"]
+
+[tool.setuptools.packages.find]
+include = ["velatoy*"]

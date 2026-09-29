@@ -1,0 +1,6 @@
+# x-pred vs v-pred toy
+torch>=2.1
+numpy>=1.24
+matplotlib>=3.8
+# optional: Wilcoxon in scripts/report.py uses scipy if present, else numpy fallbacks
+scipy>=1.11
