@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "task_name": "adjust_bottle",
+      "success": 45,
+      "test_num": 50,
+      "success_rate": 0.9
+    },
+    {
+      "task_name": "handover_block",
+      "success": 6,
+      "test_num": 50,
+      "success_rate": 0.12
+    },
+    {
+      "task_name": "open_laptop",
+      "success": 26,
+      "test_num": 50,
+      "success_rate": 0.52
+    },
+    {
+      "task_name": "place_burger_fries",
+      "success": 18,
+      "test_num": 50,
+      "success_rate": 0.36
+    },
+    {
+      "task_name": "place_object_basket",
+      "success": 10,
+      "test_num": 50,
+      "success_rate": 0.2
+    },
+    {
+      "task_name": "rotate_qrcode",
+      "success": 14,
+      "test_num": 50,
+      "success_rate": 0.28
+    },
+    {
+      "task_name": "stamp_seal",
+      "success": 3,
+      "test_num": 50,
+      "success_rate": 0.06
+    }
+  ]
+}

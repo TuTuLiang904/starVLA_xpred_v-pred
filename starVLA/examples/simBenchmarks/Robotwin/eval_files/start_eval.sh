@@ -140,10 +140,12 @@ Examples:
 
 Environment variables (lower priority than flags):
   ROBOTWIN_PATH              Path to the RoboTwin repository
-  ROBOTWIN_STARVLA_ENV       Conda env name for the policy server (default: starvla)
-  ROBOTWIN_ENV               Conda env name for RoboTwin eval (default: robotwin)
+  ROBOTWIN_STARVLA_ENV       Conda env name for the policy server (default: starVLA)
+  ROBOTWIN_ENV               Conda env name for RoboTwin eval (default: RoboTwin)
   STARVLA_PYTHON             Explicit python path for starvla (skips conda env lookup)
   ROBOTWIN_PYTHON            Explicit python path for robotwin (skips conda env lookup)
+  STARVLA_CPU_THREADS        PyTorch CPU threads per policy server (use 1-4 for concurrent evals)
+  ROBOTWIN_PORT_CLEANUP_TIMEOUT  Seconds to wait for a reused slot port to become free (default: 30)
 EOF
 }
 
@@ -207,14 +209,28 @@ wait_for_server() {
     local server_pid="${3:-}"
     local elapsed=0
     while (( elapsed < timeout_s )); do
-        if port_in_use "${port}"; then
-            return 0
-        fi
         if [[ -n "${server_pid}" ]] && ! kill -0 "${server_pid}" 2>/dev/null; then
             return 1
         fi
+        if port_in_use "${port}"; then
+            return 0
+        fi
         sleep 2
         elapsed=$((elapsed + 2))
+    done
+    return 1
+}
+
+wait_for_port_free() {
+    local port="$1"
+    local timeout_s="${2:-30}"
+    local elapsed=0
+    while (( elapsed < timeout_s )); do
+        if ! port_in_use "${port}"; then
+            return 0
+        fi
+        sleep 1
+        elapsed=$((elapsed + 1))
     done
     return 1
 }
@@ -366,8 +382,19 @@ launch_task_in_slot() {
 
         server_pid=""
         cleanup_server() {
-            if [[ -n "${server_pid}" ]] && kill -0 "${server_pid}" 2>/dev/null; then
-                kill "${server_pid}" 2>/dev/null || true
+            if [[ -n "${server_pid}" ]]; then
+                # run_policy_server.sh execs the Python server, but recurse as
+                # well so this remains safe if the wrapper gains children.
+                kill_descendants "${server_pid}" TERM
+                for _ in {1..20}; do
+                    if ! kill -0 "${server_pid}" 2>/dev/null; then
+                        break
+                    fi
+                    sleep 0.25
+                done
+                if kill -0 "${server_pid}" 2>/dev/null; then
+                    kill_descendants "${server_pid}" KILL
+                fi
                 wait "${server_pid}" 2>/dev/null || true
             fi
         }
@@ -376,6 +403,13 @@ launch_task_in_slot() {
         export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
         export STARVLA_PYTHON="${STARVLA_PYTHON}"
         export ROBOTWIN_PYTHON="${ROBOTWIN_PYTHON}"
+
+        # A failed task reuses the slot's fixed port.  Never start a new
+        # server while an old/orphaned process is still listening there.
+        if port_in_use "${port}" && ! wait_for_port_free "${port}" "${ROBOTWIN_PORT_CLEANUP_TIMEOUT:-30}"; then
+            echo "[ERROR] Port ${port} is still occupied before launching task=${task_name}; refusing to attach to a stale policy server." >&2
+            exit 1
+        fi
 
         bash "${SCRIPT_DIR}/run_policy_server.sh" "${CKPT_PATH}" "${gpu_id}" "${port}" > "${server_log}" 2>&1 &
         server_pid=$!
@@ -464,12 +498,18 @@ if ${opt_install}; then
     ROBOTWIN_AUTO_INSTALL_DEPS=1
 fi
 
-STARVLA_PYTHON="$(resolve_python "${STARVLA_PYTHON:-}" "${ROBOTWIN_STARVLA_ENV:-starvla}")"
-ROBOTWIN_PYTHON="$(resolve_python "${ROBOTWIN_PYTHON:-}" "${ROBOTWIN_ENV:-robotwin}")"
-export STARVLA_PYTHON ROBOTWIN_PYTHON
+STARVLA_PYTHON="$(resolve_python "${STARVLA_PYTHON:-}" "${ROBOTWIN_STARVLA_ENV:-starVLA}")"
+ROBOTWIN_PYTHON="$(resolve_python "${ROBOTWIN_PYTHON:-}" "${ROBOTWIN_ENV:-RoboTwin}")"
+# A policy server is a separate PyTorch process.  With multiple evaluation
+# terminals, leaving PyTorch's default thread pool unlimited oversubscribes
+# the host (and can starve the WebSocket event loops).  Keep the setting
+# user-overridable, but use a conservative default for local parallel eval.
+STARVLA_CPU_THREADS="${STARVLA_CPU_THREADS:-2}"
+export STARVLA_PYTHON ROBOTWIN_PYTHON STARVLA_CPU_THREADS
 
 echo "[INFO] starvla python: ${STARVLA_PYTHON}"
 echo "[INFO] robotwin python: ${ROBOTWIN_PYTHON}"
+echo "[INFO] STARVLA_CPU_THREADS=${STARVLA_CPU_THREADS}"
 
 mapfile -t TASKS < <(resolve_tasks "$@")
 mapfile -t CUDA_DEVICES < <(detect_cuda_devices)

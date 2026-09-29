@@ -4,6 +4,7 @@
 # Datasets, model weights, checkpoints, and run artifacts.
 /starVLA/playground/
 **/datasets/
+**/Datasets/
 **/data/
 FastWAM/data/
 **/assets/

@@ -107,10 +107,8 @@ def main(usr_args):
     # checkpoint_num = usr_args['checkpoint_num']
     policy_name = usr_args["policy_name"]
     instruction_type = usr_args["instruction_type"]
+    policy_ckpt_path = usr_args["policy_ckpt_path"]
     skip_get_obs_within_replan = parse_bool(usr_args.get("skip_get_obs_within_replan", False))
-    eval_num_episodes = int(usr_args.get("eval_num_episodes", 100))
-    if eval_num_episodes <= 0:
-        raise ValueError(f"`eval_num_episodes` must be > 0, got: {eval_num_episodes}")
     eval_output_dir = usr_args.get("eval_output_dir")
     save_dir = None
     video_save_dir = None
@@ -121,9 +119,19 @@ def main(usr_args):
     with open(f"./task_config/{task_config}.yml", "r", encoding="utf-8") as f:
         args = yaml.load(f.read(), Loader=yaml.FullLoader)
 
+    eval_num_episodes = int(usr_args.get("eval_num_episodes", args.get("episode_num", 50)))
+    if eval_num_episodes <= 0:
+        raise ValueError(f"`eval_num_episodes` must be > 0, got: {eval_num_episodes}")
+    print(
+        f"[INFO] RoboTwin task={task_name} config={task_config} "
+        f"episodes={eval_num_episodes} video={bool(args.get('eval_video_log', False))}",
+        flush=True,
+    )
+
     args['task_name'] = task_name
     args["task_config"] = task_config
     args["ckpt_setting"] = ckpt_setting
+    args["policy_ckpt_path"] = policy_ckpt_path
 
     embodiment_type = args.get("embodiment")
     embodiment_config_path = os.path.join(CONFIGS_PATH, "_embodiment_config.yml")
@@ -266,6 +274,11 @@ def eval_policy(task_name,
     while succ_seed < test_num:
         render_freq = args["render_freq"]
         args["render_freq"] = 0
+
+        print(
+            f"[INFO] Starting episode {succ_seed + 1}/{test_num} (seed={now_seed})",
+            flush=True,
+        )
 
         if expert_check:
             try:
@@ -414,11 +427,13 @@ def eval_policy(task_name,
 def parse_args_and_config():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, required=True)
+    parser.add_argument("--policy_ckpt_path", type=str, required=True)
     parser.add_argument("--overrides", nargs=argparse.REMAINDER)
     args = parser.parse_args()
 
     with open(args.config, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
+    config["policy_ckpt_path"] = args.policy_ckpt_path
 
     # Parse overrides
     def parse_override_pairs(pairs):

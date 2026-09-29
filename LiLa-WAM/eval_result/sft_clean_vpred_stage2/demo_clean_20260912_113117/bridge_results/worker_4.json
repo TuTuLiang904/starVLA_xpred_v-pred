@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "task_name": "click_alarmclock",
+      "success": 39,
+      "test_num": 50,
+      "success_rate": 0.78
+    },
+    {
+      "task_name": "move_can_pot",
+      "success": 15,
+      "test_num": 50,
+      "success_rate": 0.3
+    },
+    {
+      "task_name": "place_a2b_left",
+      "success": 4,
+      "test_num": 50,
+      "success_rate": 0.08
+    },
+    {
+      "task_name": "place_dual_shoes",
+      "success": 1,
+      "test_num": 50,
+      "success_rate": 0.02
+    },
+    {
+      "task_name": "place_shoe",
+      "success": 12,
+      "test_num": 50,
+      "success_rate": 0.24
+    },
+    {
+      "task_name": "stack_blocks_three",
+      "success": 0,
+      "test_num": 50,
+      "success_rate": 0.0
+    }
+  ]
+}

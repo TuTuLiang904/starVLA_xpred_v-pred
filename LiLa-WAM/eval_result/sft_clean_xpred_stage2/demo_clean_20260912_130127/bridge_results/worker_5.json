@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "task_name": "click_bell",
+      "success": 9,
+      "test_num": 50,
+      "success_rate": 0.18
+    },
+    {
+      "task_name": "move_pillbottle_pad",
+      "success": 2,
+      "test_num": 50,
+      "success_rate": 0.04
+    },
+    {
+      "task_name": "place_a2b_right",
+      "success": 8,
+      "test_num": 50,
+      "success_rate": 0.16
+    },
+    {
+      "task_name": "place_empty_cup",
+      "success": 16,
+      "test_num": 50,
+      "success_rate": 0.32
+    },
+    {
+      "task_name": "press_stapler",
+      "success": 31,
+      "test_num": 50,
+      "success_rate": 0.62
+    },
+    {
+      "task_name": "stack_blocks_two",
+      "success": 0,
+      "test_num": 50,
+      "success_rate": 0.0
+    }
+  ]
+}

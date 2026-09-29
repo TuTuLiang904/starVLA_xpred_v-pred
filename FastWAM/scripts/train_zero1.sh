@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NPROC_PER_NODE="${1:?Usage: bash scripts/train_zero1.sh <nproc_per_node> [hydra_overrides...]}"
-shift
+# Keep the official ``...sh 8 task=...`` form, but default to one 8-GPU node
+# when the first argument is a Hydra override.  This makes the common command
+# independent of an explicit card-count argument while preserving backwards
+# compatibility with existing launch scripts.
+if [[ $# -gt 0 && "$1" =~ ^[0-9]+$ ]]; then
+  NPROC_PER_NODE="$1"
+  shift
+else
+  NPROC_PER_NODE="${NPROC_PER_NODE:-8}"
+fi
 
 EXTRA_ARGS=("$@")
 NUM_MACHINES="${NNODES:-1}"

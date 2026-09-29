@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "task_name": "grab_roller",
+      "success": 47,
+      "test_num": 50,
+      "success_rate": 0.94
+    },
+    {
+      "task_name": "move_stapler_pad",
+      "success": 2,
+      "test_num": 50,
+      "success_rate": 0.04
+    },
+    {
+      "task_name": "place_bread_skillet",
+      "success": 7,
+      "test_num": 50,
+      "success_rate": 0.14
+    },
+    {
+      "task_name": "place_mouse_pad",
+      "success": 2,
+      "test_num": 50,
+      "success_rate": 0.04
+    },
+    {
+      "task_name": "put_object_cabinet",
+      "success": 11,
+      "test_num": 50,
+      "success_rate": 0.22
+    },
+    {
+      "task_name": "stack_bowls_two",
+      "success": 33,
+      "test_num": 50,
+      "success_rate": 0.66
+    }
+  ]
+}

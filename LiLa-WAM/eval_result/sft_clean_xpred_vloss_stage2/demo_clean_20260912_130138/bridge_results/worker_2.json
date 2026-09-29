@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "task_name": "blocks_ranking_rgb",
+      "success": 0,
+      "test_num": 50,
+      "success_rate": 0.0
+    },
+    {
+      "task_name": "hanging_mug",
+      "success": 8,
+      "test_num": 50,
+      "success_rate": 0.16
+    },
+    {
+      "task_name": "pick_diverse_bottles",
+      "success": 8,
+      "test_num": 50,
+      "success_rate": 0.16
+    },
+    {
+      "task_name": "place_cans_plasticbox",
+      "success": 7,
+      "test_num": 50,
+      "success_rate": 0.14
+    },
+    {
+      "task_name": "place_object_stand",
+      "success": 15,
+      "test_num": 50,
+      "success_rate": 0.3
+    },
+    {
+      "task_name": "shake_bottle",
+      "success": 43,
+      "test_num": 50,
+      "success_rate": 0.86
+    }
+  ]
+}

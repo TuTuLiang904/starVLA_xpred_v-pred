@@ -1,0 +1,14 @@
+# RoboTwin-side config for the WebSocket client.  The FastWAM model lives in
+# experiments/robotwin/fastwam_policy_server.py under the fastwam environment.
+policy_name: fastwam_policy
+task_name: null
+task_config: null
+ckpt_setting: null
+seed: 0
+instruction_type: unseen
+eval_num_episodes: 100
+server_mode: true
+host: "127.0.0.1"
+port: 5694
+replan_steps: 24
+skip_get_obs_within_replan: true

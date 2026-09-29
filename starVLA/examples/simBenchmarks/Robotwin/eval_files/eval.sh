@@ -9,7 +9,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
 
-ROBOTWIN_PATH="${ROBOTWIN_PATH:-/mnt/data/gaoning/code_repos/RoboTwin}"
+ROBOTWIN_PATH="${ROBOTWIN_PATH:-/mnt/pfs/pg4hw0/mobile/qiwei/mobile/starVLA_xpred_v-pred/FastWAM/third_party/RoboTwin}"
 if [[ ! -d "${ROBOTWIN_PATH}" ]]; then
     echo "ROBOTWIN_PATH does not exist: ${ROBOTWIN_PATH}" >&2
     exit 1
@@ -51,6 +51,16 @@ policy_port="${7:-${ROBOTWIN_POLICY_PORT:-5694}}"
 policy_host="${8:-${ROBOTWIN_POLICY_HOST:-127.0.0.1}}"
 robotwin_python="${ROBOTWIN_PYTHON:-python}"
 deploy_policy_template="${DEPLOY_POLICY_TEMPLATE_PATH:-${SCRIPT_DIR}/deploy_policy.yml}"
+robotwin_num_episodes="${ROBOTWIN_NUM_EPISODES:-}"
+
+episode_override=()
+if [[ -n "${robotwin_num_episodes}" ]]; then
+    if [[ ! "${robotwin_num_episodes}" =~ ^[1-9][0-9]*$ ]]; then
+        echo "ROBOTWIN_NUM_EPISODES must be a positive integer, got: ${robotwin_num_episodes}" >&2
+        exit 2
+    fi
+    episode_override+=(--eval_num_episodes "${robotwin_num_episodes}")
+fi
 
 if [[ ! -f "${deploy_policy_template}" ]]; then
     echo "Deploy policy template does not exist: ${deploy_policy_template}" >&2
@@ -94,4 +104,5 @@ PYTHONWARNINGS=ignore::UserWarning \
     --task_config "${task_config}" \
     --ckpt_setting "${ckpt_setting}" \
     --seed "${seed}" \
-    --policy_name "${policy_name}"
+    --policy_name "${policy_name}" \
+    "${episode_override[@]}"

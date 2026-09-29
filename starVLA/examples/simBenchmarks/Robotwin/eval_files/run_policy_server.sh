@@ -21,12 +21,25 @@ if [[ "${ROBOTWIN_USE_BF16:-1}" != "0" ]]; then
     use_bf16_flag+=(--use_bf16)
 fi
 
+# Optional inference-only override.  The default is empty, so the original
+# evaluation path is unchanged.  The toy NFE sweep uses this to override the
+# checkpoint's action-model solver steps without editing the checkpoint.
+config_override_args=()
+if [[ -n "${STARVLA_CONFIG_OVERRIDE:-}" ]]; then
+    IFS=',' read -r -a override_values <<< "${STARVLA_CONFIG_OVERRIDE}"
+    for override in "${override_values[@]}"; do
+        [[ -n "${override}" ]] || continue
+        config_override_args+=(--config_override "${override}")
+    done
+fi
+
 echo "[INFO] Starting RoboTwin policy server"
 echo "[INFO] checkpoint: ${your_ckpt}"
 echo "[INFO] gpu: ${gpu_id}"
 echo "[INFO] port: ${port}"
 
-CUDA_VISIBLE_DEVICES="${gpu_id}" "${star_vla_python}" "${REPO_ROOT}/deployment/model_server/server_policy.py" \
+exec env CUDA_VISIBLE_DEVICES="${gpu_id}" "${star_vla_python}" "${REPO_ROOT}/deployment/model_server/server_policy.py" \
     --ckpt_path "${your_ckpt}" \
     --port "${port}" \
+    "${config_override_args[@]}" \
     "${use_bf16_flag[@]}"

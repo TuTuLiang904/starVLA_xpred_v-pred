@@ -1,0 +1,263 @@
+{
+  "dino_checkpoint": "./dinov3_pretrain",
+  "hidden_size": 1024,
+  "image_size": [
+    320,
+    240
+  ],
+  "data_mode": "clean",
+  "camera_name": "head_camera",
+  "feature": "last_layer_cls_diff (last_frame - first_frame), averaged per task",
+  "tasks": {
+    "adjust_bottle": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.763575553894043
+    },
+    "beat_block_hammer": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.342350006103516
+    },
+    "blocks_ranking_rgb": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 12.518431663513184
+    },
+    "blocks_ranking_size": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 13.551555633544922
+    },
+    "click_alarmclock": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 6.818251609802246
+    },
+    "click_bell": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 9.929952621459961
+    },
+    "dump_bin_bigbin": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 7.539501667022705
+    },
+    "grab_roller": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 15.540445327758789
+    },
+    "handover_block": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 10.685258865356445
+    },
+    "handover_mic": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 14.147314071655273
+    },
+    "hanging_mug": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 7.925439834594727
+    },
+    "lift_pot": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 9.248775482177734
+    },
+    "move_can_pot": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 7.79818868637085
+    },
+    "move_pillbottle_pad": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 9.716249465942383
+    },
+    "move_playingcard_away": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 6.282759666442871
+    },
+    "move_stapler_pad": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 9.96075439453125
+    },
+    "open_laptop": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 12.916619300842285
+    },
+    "open_microwave": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 9.54696273803711
+    },
+    "pick_diverse_bottles": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.662137031555176
+    },
+    "pick_dual_bottles": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 12.351452827453613
+    },
+    "place_a2b_left": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 10.937170028686523
+    },
+    "place_a2b_right": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 9.27822494506836
+    },
+    "place_bread_basket": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 12.76817512512207
+    },
+    "place_bread_skillet": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 14.296854972839355
+    },
+    "place_burger_fries": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 11.686832427978516
+    },
+    "place_can_basket": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 13.719550132751465
+    },
+    "place_cans_plasticbox": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 7.30909538269043
+    },
+    "place_container_plate": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.698616981506348
+    },
+    "place_dual_shoes": {
+      "num_episodes": 44,
+      "dim": 1024,
+      "norm": 13.638936042785645
+    },
+    "place_empty_cup": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 11.82590103149414
+    },
+    "place_fan": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 9.179670333862305
+    },
+    "place_mouse_pad": {
+      "num_episodes": 47,
+      "dim": 1024,
+      "norm": 10.034732818603516
+    },
+    "place_object_basket": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 12.131834983825684
+    },
+    "place_object_scale": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.590259552001953
+    },
+    "place_object_stand": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 12.899282455444336
+    },
+    "place_phone_stand": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 11.572158813476562
+    },
+    "place_shoe": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 12.927240371704102
+    },
+    "press_stapler": {
+      "num_episodes": 47,
+      "dim": 1024,
+      "norm": 12.325631141662598
+    },
+    "put_bottles_dustbin": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.518677711486816
+    },
+    "put_object_cabinet": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 13.164128303527832
+    },
+    "rotate_qrcode": {
+      "num_episodes": 48,
+      "dim": 1024,
+      "norm": 9.875399589538574
+    },
+    "scan_object": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 10.015392303466797
+    },
+    "shake_bottle": {
+      "num_episodes": 47,
+      "dim": 1024,
+      "norm": 11.14439868927002
+    },
+    "shake_bottle_horizontally": {
+      "num_episodes": 48,
+      "dim": 1024,
+      "norm": 11.853459358215332
+    },
+    "stack_blocks_three": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 14.851630210876465
+    },
+    "stack_blocks_two": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 15.133504867553711
+    },
+    "stack_bowls_three": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 11.214234352111816
+    },
+    "stack_bowls_two": {
+      "num_episodes": 50,
+      "dim": 1024,
+      "norm": 11.253952980041504
+    },
+    "stamp_seal": {
+      "num_episodes": 49,
+      "dim": 1024,
+      "norm": 9.114764213562012
+    },
+    "turn_switch": {
+      "num_episodes": 48,
+      "dim": 1024,
+      "norm": 10.420687675476074
+    }
+  }
+}

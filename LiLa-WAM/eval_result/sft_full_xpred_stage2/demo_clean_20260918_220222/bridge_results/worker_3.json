@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "task_name": "blocks_ranking_size",
+      "success": 39,
+      "test_num": 50,
+      "success_rate": 0.78
+    },
+    {
+      "task_name": "lift_pot",
+      "success": 40,
+      "test_num": 50,
+      "success_rate": 0.8
+    },
+    {
+      "task_name": "pick_dual_bottles",
+      "success": 48,
+      "test_num": 50,
+      "success_rate": 0.96
+    },
+    {
+      "task_name": "place_container_plate",
+      "success": 49,
+      "test_num": 50,
+      "success_rate": 0.98
+    },
+    {
+      "task_name": "place_phone_stand",
+      "success": 42,
+      "test_num": 50,
+      "success_rate": 0.84
+    },
+    {
+      "task_name": "shake_bottle_horizontally",
+      "success": 50,
+      "test_num": 50,
+      "success_rate": 1.0
+    }
+  ]
+}

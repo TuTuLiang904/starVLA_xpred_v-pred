@@ -1,0 +1,11 @@
+# @package _global_
+
+# Controlled parameterization comparison: keep the pretrained Wan video
+# backbone, but initialize the ActionDiT randomly for every prediction mode.
+defaults:
+  - robotwin_uncond_3cam_384_1e-4_clean50
+  - _self_
+
+model:
+  action_dit_pretrained_path: null
+  action_prediction_type: v_prediction

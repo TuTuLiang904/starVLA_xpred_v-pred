@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "task_name": "beat_block_hammer",
+      "success": 16,
+      "test_num": 50,
+      "success_rate": 0.32
+    },
+    {
+      "task_name": "handover_mic",
+      "success": 21,
+      "test_num": 50,
+      "success_rate": 0.42
+    },
+    {
+      "task_name": "open_microwave",
+      "success": 2,
+      "test_num": 50,
+      "success_rate": 0.04
+    },
+    {
+      "task_name": "place_can_basket",
+      "success": 11,
+      "test_num": 50,
+      "success_rate": 0.22
+    },
+    {
+      "task_name": "place_object_scale",
+      "success": 2,
+      "test_num": 50,
+      "success_rate": 0.04
+    },
+    {
+      "task_name": "scan_object",
+      "success": 9,
+      "test_num": 50,
+      "success_rate": 0.18
+    },
+    {
+      "task_name": "turn_switch",
+      "success": 15,
+      "test_num": 50,
+      "success_rate": 0.3
+    }
+  ]
+}

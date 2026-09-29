@@ -72,7 +72,14 @@ class WebsocketPolicyServer:
             try:
                 msg = msgpack_numpy.unpackb(await websocket.recv())
                 self._last_active = time.time()  # Refresh active time on each received message
-                ret = self._route_message(msg)  # route message
+                # Model inference is synchronous and can take several seconds
+                # when multiple local evaluations share the GPUs.  Running it
+                # directly in this asyncio handler blocks the event loop, so
+                # websockets cannot answer ping/pong frames and closes healthy
+                # clients with ``1011 keepalive ping timeout``.  Keep the
+                # per-connection request ordering, but move the blocking model
+                # call off the event-loop thread.
+                ret = await asyncio.to_thread(self._route_message, msg)
                 await websocket.send(packer.pack(ret))
             except websockets.ConnectionClosed:
                 logging.info(f"Connection from {websocket.remote_address} closed")
