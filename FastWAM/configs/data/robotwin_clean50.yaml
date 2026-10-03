@@ -1,0 +1,13 @@
+# Official RoboTwin clean-only data-scaling subset: 50 tasks x 50 episodes.
+defaults:
+  - robotwin
+  - _self_
+
+train:
+  episode_subset_path: ./data/robotwin2.0/subsets/clean_50x50.json
+  # The full cache is safe to reuse: the subset only reads prompts it needs.
+  text_embedding_cache_dir: ./data/text_embeds_cache/robotwin
+
+val:
+  episode_subset_path: ./data/robotwin2.0/subsets/clean_50x50.json
+  text_embedding_cache_dir: ./data/text_embeds_cache/robotwin

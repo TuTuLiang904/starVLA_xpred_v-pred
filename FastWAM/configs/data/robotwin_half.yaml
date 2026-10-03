@@ -1,0 +1,14 @@
+# Half of RoboTwin, selected as complete episodes by a deterministic manifest.
+defaults:
+  - robotwin
+  - _self_
+
+train:
+  episode_subset_path: ./data/robotwin2.0/subsets/half_seed42.json
+  # Reuse the official full-dataset T5 cache by default. The selected episode
+  # subset only reads the entries it needs.
+  text_embedding_cache_dir: ./data/text_embeds_cache/robotwin
+
+val:
+  episode_subset_path: ./data/robotwin2.0/subsets/half_seed42.json
+  text_embedding_cache_dir: ./data/text_embeds_cache/robotwin
